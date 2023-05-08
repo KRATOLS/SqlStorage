@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" class="edit-query__form" id="form">
+        <select name="" id="" class="edit-query__select">
+            <?php require_once '../php/get_options.php'; ?>
+        </select>
+        <input name="query_name" type="text" class="edit-query__input" placeholder="Название запроса">
+        <textarea class="edit-query__textarea" name="query"></textarea>
+        <button class="edit-query__btn" type="submit">Сохранить</button>
+    </form>
+    <p class="edit-query__message"></p>
+</body>
+</html>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+<script>
+            
+    document.querySelector('.edit-query__select').onchange = function(event) {
+        let selectedIndex = event.target.selectedIndex;
+        if (selectedIndex !== 0) {
+            //location.href = "//storage/php/run_query.php?id=" + selectedIndex;
+            let option = document.getElementById(selectedIndex);
+            let query_id = option.getAttribute('data-query_id');
+
+            $.ajax({
+			method:'post',
+			url:'../php/get_query.php',
+			dataType:'html',
+			data: {id: query_id},
+			success:function(html) {
+                let text_area = document.querySelector('.edit-query__textarea');
+                text_area.value = html;
+            }
+            });      
+            
+        }            
+    }
+
+    $("#form").on("submit", function(event){
+        event.preventDefault();
+        let selectedIndex = document.querySelector('.edit-query__select').selectedIndex;
+        let selectedOption = document.getElementById(selectedIndex);
+
+        let query_id = selectedOption.getAttribute('data-query_id');
+        let query_name = document.querySelector('.edit-query__input').value;
+        let query_str = document.querySelector('.edit-query__textarea').value;
+
+        $.ajax({
+            url: '../php/update_query.php',
+            method: 'post',
+            dataType: 'html',
+            //data: $(this).serialize(),
+            data: {id: query_id, name: query_name, query_string: query_str},
+            success: function(html){
+                let message = document.querySelector('.edit-query__message');
+                message.innerHTML = html;
+            }
+        });
+    });
+    
+    
+</script>
+</body>
+</html>

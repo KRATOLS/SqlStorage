@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" class="run-query__form" id="form">
+        <select name="" id="" class="run-query__select">
+            <?php require_once '../php/get_options.php'; ?>
+        </select>
+        <textarea readonly="readonly" class="run-query__textarea" name="query"></textarea>
+        <button class="run-query__btn" type="submit">Выполнить</button>
+        <table class="run-query__tbl"></table>
+    </form>
+</body>
+</html>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+<script>
+            
+    document.querySelector('.run-query__select').onchange = function(event) {
+        let selectedIndex = event.target.selectedIndex;
+        if (selectedIndex !== 0) {
+            //location.href = "//storage/php/run_query.php?id=" + selectedIndex;
+            let option = document.getElementById(selectedIndex);
+            let query_id = option.getAttribute('data-query_id');
+            console.log(query_id);
+
+            $.ajax({
+			method:'post',
+			url:'../php/get_query.php',
+			dataType:'html',
+			data: {id: query_id},
+			success:function(html) {
+                let text_area = document.querySelector('.run-query__textarea');
+                text_area.innerHTML = html;
+            }
+            });      
+            
+        }            
+    }
+
+    $("#form").on("submit", function(event){
+        event.preventDefault();
+        $.ajax({
+            url: '../php/get_query_result_table.php',
+            method: 'post',
+            dataType: 'html',
+            data: $(this).serialize(),
+            success: function(html){
+                let table = document.querySelector('.run-query__tbl');
+                table.innerHTML = html;
+            }
+        });
+    });
+    
+    
+</script>

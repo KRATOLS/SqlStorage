@@ -1,0 +1,121 @@
+html {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+table, th, tr, td, p, form {
+    padding: 0;
+    margin: 0;
+}
+ table {
+    border: 1px solid black;
+ }
+ th {
+    border-right: 1px solid black;
+    padding-right: 20px;
+    background-color: rgb(194, 191, 191);
+}
+th:last-child {
+    border-right: 0px;
+}
+td {
+    border: 1px solid black;
+}
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+/*Run query*/
+.run-query__form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 0 auto;
+}
+.run-query__select {
+    margin-bottom: 10px;
+}
+.run-query__textarea {
+    margin-bottom: 10px;
+    height: 180px;
+}
+.run-query__btn {
+    width: 90px;
+    align-self: self-end;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+.run-query__tbl th {
+    border-left: none ;
+    border-right: none ;
+    text-align: center;
+}
+.subtitles td{
+    background-color: rgb(0, 255, 136);
+}
+/*Create Query*/
+.create-query__form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 0 auto;
+}
+.create-query__input {
+    text-align: left;
+    color: black;
+    margin-bottom: 10px;
+}
+.create-query__input::placeholder {
+    color: black;
+}
+.create-query__textarea {
+    margin-bottom: 10px;
+    height: 180px;
+    color: black;
+}
+.create-query__textarea::placeholder {
+    color: black;
+    text-align: center;
+    padding-top: 80px;
+}
+.create-query__btn {
+    width: 90px;
+    align-self: self-end;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+.create-query__message {
+    text-align: center;
+}
+/*Edit query*/
+.edit-query__form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 0 auto;
+}
+.edit-query__select {
+    margin-bottom: 10px;
+}
+.edit-query__textarea {
+    margin-bottom: 10px;
+    height: 180px;
+}
+.edit-query__btn {
+    width: 90px;
+    align-self: self-end;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+.edit-query__input {
+    text-align: left;
+    color: black;
+    margin-bottom: 10px;
+}
+.edit-query__input::placeholder {
+    color: black;
+}
+.edit-query__message {
+    text-align: center;
+}
